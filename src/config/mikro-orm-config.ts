@@ -2,6 +2,7 @@
 import { ConfigService } from '@nestjs/config';
 import { MikroOrmModuleOptions } from '@mikro-orm/nestjs';
 import { User } from '../user/user.schema';
+import { UserCollection } from '../user-collection/user-collection.schema';
 
 export const MIKRO_ORM_CONFIG = Symbol('MIKRO_ORM_CONFIG');
 
@@ -16,6 +17,7 @@ function mikroOrmConfigFactory(
   return {
     entities: [
       User,
+      UserCollection
     ],
     dbName: process.env.NODE_ENV === 'production' ? 'limelight' : 'limelighttest',
     type: 'mongo',
