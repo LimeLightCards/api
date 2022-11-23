@@ -1,7 +1,5 @@
-import { Entity, Embedded, PrimaryKey, Property, Unique, SerializedPrimaryKey } from '@mikro-orm/core';
+import { Entity, PrimaryKey, Property, Unique, SerializedPrimaryKey } from '@mikro-orm/core';
 import { ObjectId } from '@mikro-orm/mongodb';
-
-import { UserCollection } from '../user-collection/user-collection.schema';
 
 export type UserId = User['_id'];
 
@@ -25,9 +23,6 @@ export class User {
 
   @Property()
   displayName: string;
-
-  @Embedded({ entity: () => UserCollection, object: true })
-  collection: UserCollection = new UserCollection();
 
   constructor(
     firebaseUId: string,

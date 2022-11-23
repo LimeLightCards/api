@@ -4,15 +4,15 @@ import { RequestUser } from '../request-user.decorator';
 import { User } from '../user/user.schema';
 import { UserCollectionService } from './user-collection.service';
 
-@Controller('user/collection')
+@Controller('collection')
 export class UserCollectionController {
 
   constructor(private readonly userCollectionService: UserCollectionService) {}
 
   @Get()
   @UseGuards(BearerAuthGuard)
-  getCards(@RequestUser() user: User) {
-    return this.userCollectionService.getCards(user);
+  async getCards(@RequestUser() user: User) {
+    return { collection: await this.userCollectionService.getCards(user) };
   }
 
   @Delete()
