@@ -9,6 +9,7 @@ import { AuthService } from './auth.service';
 import { BearerStrategy } from './bearer.strategy';
 import { UserEmailRetrieverService } from './user-email-retriever.service';
 import { AuthController } from './auth.controller';
+import { SharedModule } from '../shared/shared.module';
 
 const firebaseFactory: FactoryProvider<App> = {
   provide: 'FIREBASE_ADMIN',
@@ -48,7 +49,7 @@ const firebaseAuthFactory: FactoryProvider<Auth> = {
 };
 
 @Module({
-  imports: [ConfigModule, UserModule, PassportModule],
+  imports: [ConfigModule, UserModule, PassportModule, SharedModule],
   providers: [
     AuthService,
     BearerStrategy,

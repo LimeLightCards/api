@@ -29,6 +29,7 @@
     "@nestjs/core": "^9.0.0",
     "@nestjs/passport": "^9.0.0",
     "@nestjs/platform-express": "^9.0.0",
+    "censor-sensor": "^1.0.6",
     "compress-json": "^2.1.2",
     "firebase-admin": "^11.2.1",
     "fs-extra": "^10.1.0",
@@ -36,7 +37,8 @@
     "passport-http-bearer": "^1.0.1",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
-    "rxjs": "^7.2.0"
+    "rxjs": "^7.2.0",
+    "search-query-parser": "^1.6.0"
   },
   "devDependencies": {
     "@nestjs/cli": "^9.0.0",

@@ -1,4 +1,4 @@
-import { Entity, Embedded, PrimaryKey, Property, Unique } from '@mikro-orm/core';
+import { Entity, Embedded, PrimaryKey, Property, Unique, SerializedPrimaryKey } from '@mikro-orm/core';
 import { ObjectId } from '@mikro-orm/mongodb';
 
 import { UserCollection } from '../user-collection/user-collection.schema';
@@ -10,6 +10,9 @@ export class User {
   @PrimaryKey()
   _id!: ObjectId;
 
+  @SerializedPrimaryKey()
+  id!: string;
+
   @Property({ hidden: true })
   @Unique()
   firebaseUId: string;
@@ -18,9 +21,12 @@ export class User {
   authTime: number;
 
   @Property()
+  createdAt: number;
+
+  @Property()
   displayName: string;
 
-  @Embedded(() => UserCollection, { object: true })
+  @Embedded({ entity: () => UserCollection, object: true })
   collection: UserCollection = new UserCollection();
 
   constructor(
@@ -31,5 +37,6 @@ export class User {
     this.firebaseUId = firebaseUId;
     this.displayName = displayName;
     this.authTime = authTime;
+    this.createdAt = Date.now();
   }
 }

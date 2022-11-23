@@ -3,7 +3,7 @@ import {
   UniqueConstraintViolationException,
 } from '@mikro-orm/core';
 import { Injectable } from '@nestjs/common';
-import { User, UserId } from './user.schema';
+import { User } from './user.schema';
 import { InjectRepository } from '@mikro-orm/nestjs';
 
 export class UserExistsError extends Error {
@@ -44,12 +44,12 @@ export class UserService {
     }
   }
 
-  async findById(userId: UserId): Promise<User | null> {
-    return await this.userRepository.findOne(userId);
+  async findById(userId: string): Promise<User | null> {
+    return await this.userRepository.findOne({ id: userId });
   }
 
-  async findByIdOrFail(userId: UserId): Promise<User> {
-    return await this.userRepository.findOneOrFail(userId);
+  async findByIdOrFail(userId: string): Promise<User> {
+    return await this.userRepository.findOneOrFail({ id: userId });
   }
 
   async findByFirebaseUId(firebaseUId: string): Promise<User | null> {
