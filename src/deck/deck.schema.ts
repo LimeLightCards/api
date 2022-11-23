@@ -1,4 +1,4 @@
-import { Entity, PrimaryKey, Property, SerializedPrimaryKey } from '@mikro-orm/core';
+import { Entity, PrimaryKey, Property, SerializedPrimaryKey, Index } from '@mikro-orm/core';
 import { ObjectId } from '@mikro-orm/mongodb';
 
 import { User } from '../user/user.schema';
@@ -16,6 +16,7 @@ export class Deck {
   id!: string;
 
   @Property()
+  @Index()
   authorId: ObjectId;
 
   @Property({ persist: false })
@@ -99,6 +100,7 @@ export class DeckRevision {
   id!: string;
 
   @Property()
+  @Index()
   deckId: ObjectId;
 
   @Property({ persist: false })

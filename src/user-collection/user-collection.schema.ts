@@ -1,4 +1,4 @@
-import { Entity, PrimaryKey, Property, SerializedPrimaryKey } from '@mikro-orm/core';
+import { Entity, PrimaryKey, Property, Index, SerializedPrimaryKey } from '@mikro-orm/core';
 import { ObjectId } from '@mikro-orm/mongodb';
 import { User } from '../user/user.schema';
 
@@ -11,6 +11,7 @@ export class UserCollection {
   id!: string;
 
   @Property()
+  @Index()
   ownerId: ObjectId;
 
   @Property({ persist: false })
