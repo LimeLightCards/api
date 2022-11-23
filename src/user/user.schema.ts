@@ -1,4 +1,4 @@
-import { Entity, PrimaryKey, Property, Index, Unique, SerializedPrimaryKey } from '@mikro-orm/core';
+import { Entity, PrimaryKey, Property, Unique, SerializedPrimaryKey } from '@mikro-orm/core';
 import { ObjectId } from '@mikro-orm/mongodb';
 
 export type UserId = User['_id'];
@@ -12,7 +12,6 @@ export class User {
   id!: string;
 
   @Property({ hidden: true })
-  @Index()
   @Unique()
   firebaseUId: string;
 
