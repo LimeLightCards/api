@@ -57,7 +57,7 @@ export class SearchService {
       return { 
         ...deck, 
         id: deck._id.toString(), 
-        author: { displayName: author.displayName, id: author.id, firebaseUId: author.firebaseUId } as User 
+        author: { displayName: author.displayName, id: author.id, firebaseUId: author.firebaseUId, emailHash: author.emailHash } as User 
       };
     }));
 

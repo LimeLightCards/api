@@ -159,7 +159,7 @@ export class DeckService {
 
     const revisions = await this.deckRevisionRepository.find({ deckId: deck._id });
 
-    deck.author = { displayName: author.displayName, id: author.id, firebaseUId: author.firebaseUId } as User;
+    deck.author = { displayName: author.displayName, id: author.id, firebaseUId: author.firebaseUId, emailHash: author.emailHash } as User;
     deck.revisions = revisions.reverse();
 
     if(deck.parentId) {
@@ -205,7 +205,7 @@ export class DeckService {
     const decksWithAuthors = await Promise.all(decksWith.map(async deck => {
 
       const author = await this.userService.findById(deck.authorId.toString());
-      return { ...deck, id: deck._id, author: { displayName: author.displayName, id: author.id, firebaseUId: author.firebaseUId } as User };
+      return { ...deck, id: deck._id, author: { displayName: author.displayName, id: author.id, firebaseUId: author.firebaseUId, emailHash: author.emailHash } as User };
     }));
     
     return { decksWithCount, decksWithoutCount, decks: decksWithAuthors };

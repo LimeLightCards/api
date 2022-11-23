@@ -25,8 +25,9 @@ export class UserService {
     firebaseUId: string,
     name: string,
     authTime: number,
+    emailHash: string
   ): Promise<User> {
-    const user = new User(firebaseUId, name, authTime);
+    const user = new User(firebaseUId, name, authTime, emailHash);
     try {
       await this.userRepository.persistAndFlush(user);
       return user;

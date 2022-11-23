@@ -24,14 +24,19 @@ export class User {
   @Property()
   displayName: string;
 
+  @Property()
+  emailHash: string;
+
   constructor(
     firebaseUId: string,
     displayName: string,
-    authTime: number
+    authTime: number,
+    emailHash: string
   ) {
     this.firebaseUId = firebaseUId;
     this.displayName = displayName;
     this.authTime = authTime;
+    this.emailHash = emailHash;
     this.createdAt = Date.now();
   }
 }

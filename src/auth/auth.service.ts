@@ -6,8 +6,12 @@ import {
 } from '@nestjs/common';
 import { Auth, DecodedIdToken } from 'firebase-admin/auth';
 import { FirebaseError } from 'firebase-admin';
+
+import * as md5 from 'md5';
+
 import { User } from '../user/user.schema';
 import { UserService } from '../user/user.service';
+import { UserEmailRetrieverService } from './user-email-retriever.service';
 
 export interface UserResult {
   decodedToken: DecodedIdToken;
@@ -27,6 +31,7 @@ function isFirebaseError(error: unknown): error is FirebaseError {
 export class AuthService {
   constructor(
     private readonly userService: UserService,
+    private readonly emailRetrieverServer: UserEmailRetrieverService,
     @Inject('FIREBASE_ADMIN_AUTH')
     private readonly firebaseAuth: Auth,
   ) {}
@@ -43,10 +48,14 @@ export class AuthService {
     let user = await this.userService.findByFirebaseUId(decodedToken.uid);
 
     if (!user) {
+      const email = await this.emailRetrieverServer.getUserEmailFromFirebaseUId(decodedToken.uid);
+      const emailHash = email ? md5(email) : '';
+      
       user = await this.userService.createFromFirebase(
         decodedToken.uid,
         decodedToken.name,
         decodedToken.auth_time,
+        emailHash
       );
     }
 
